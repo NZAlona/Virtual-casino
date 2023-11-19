@@ -3,7 +3,7 @@ const refs = {
   btn: document.querySelector(".js-btn"),
 };
 
-console.dir(refs.container.children);
+// console.dir(refs.container.children);
 // this is pseudo-array
 
 refs.btn.addEventListener("click", onBtnClick);
@@ -34,9 +34,6 @@ function onBtnClick() {
                   refs.container.children,
                   (el) => (el.textContent = "")
                 );
-
-                // refs.container.children[i].textContent = "";
-                // console.log(refs.container.children);
               }
             } else {
               if (confirm("Sorry, Mega Lost 😢"));
