@@ -12,25 +12,25 @@ function onBtnClick() {
   const winner = [];
 
   const field = refs.container.children.length;
+
   for (let i = 0; i < field; i += 1) {
     refs.container.children[i].textContent = "";
 
-    createPromise("💰", "⏳", i * 350)
+    createPromise("💰", "⏳", i)
       .then((res) => {
         createFieldMark(refs.container.children[i], res);
-        winner.push(1);
+        winner.push("1");
       })
       .catch((err) => {
         createFieldMark(refs.container.children[i], err);
-        winner.push(0);
       })
       .finally(() => {
-        if (winner.length === field) {
-          setTimeout(() => {
-            if (getWinner(winner)) {
+        setTimeout(() => {
+          if (i === refs.container.children.length - 1) {
+            if (!winner.length || winner.length === field) {
               if (confirm(" Mega Win 😍"));
               {
-                const o = Array.from(
+                Array.from(
                   refs.container.children,
                   (el) => (el.textContent = "")
                 );
@@ -38,21 +38,16 @@ function onBtnClick() {
             } else {
               if (confirm("Sorry, Mega Lost 😢"));
               {
-                const o = Array.from(
+                Array.from(
                   refs.container.children,
                   (el) => (el.textContent = "")
                 );
               }
             }
-          }, 850);
-        }
+          }
+        }, 500);
       });
   }
-}
-
-function getWinner(arr) {
-  const result = arr.every((el) => el);
-  return result;
 }
 
 function createFieldMark(p, smile) {
@@ -62,13 +57,13 @@ function createFieldMark(p, smile) {
 function createPromise(win, lost, delay) {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
-      const randomM = Math.random() > 0.4;
+      const randomM = Math.random() > 0.5;
       if (randomM) {
         resolve(win);
       } else {
         reject(lost);
       }
-    }, delay);
+    }, 350 * delay);
   });
 
   return promise;
